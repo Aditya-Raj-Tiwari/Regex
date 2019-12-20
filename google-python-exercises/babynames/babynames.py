@@ -47,12 +47,8 @@ def extract_names(filename):
     # year = re.findall(r'>(.*?)</h3>',f.read(),re.DOTALL)
     return  baby_detail
 
-
-def main():
-  # +++your code here+++
-  # For each filename, get the names, then either print the text output
-  # or write it to a summary file
-  f = open('babynames.txt','w')
+def export(export_file_name):
+  f = open(export_file_name,'w')
   f.write('Rank\t Boy\t Girl\n')
   lst = extract_names('baby1990.html')
   dict_list_1990 = [{lst[i]: lst[i + 1]+' '+lst[i+2]} for i in range(0, len(lst)-2,3)]
@@ -64,7 +60,15 @@ def main():
       name_rank.append('{} {}'.format(nameOfGirl,rank))
       f.write('{}.\t\t {} \t\t {}\n'.format(rank,nameOfBoy,nameOfGirl))
   print('Done!')
-  print(name_rank)
+  return name_rank
+
+def main():
+  # +++your code here+++
+  # For each filename, get the names, then either print the text output
+  # or write it to a summary file
+  result = export('baby_names_1990.txt')
+  print(result)
+
 
 if __name__ == '__main__':
   main()
